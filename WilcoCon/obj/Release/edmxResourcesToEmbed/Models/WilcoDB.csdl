@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WilcoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SSN" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ZipCode" Type="Int32" Nullable="false" />
+    <Property Name="TelephoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DOB" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaritalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumberOfDeductions" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TimeCards" Relationship="Self.FK_dbo_TimeCard_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="TimeCard" />
+    <Property Name="EEOCOde" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobClassification">
+    <Key>
+      <PropertyRef Name="SkillId" />
+    </Key>
+    <Property Name="SkillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PayScales" Relationship="Self.FK_dbo_PayScale_dbo_JobClassification_SkillId" FromRole="JobClassification" ToRole="PayScale" />
+    <NavigationProperty Name="TimeCards" Relationship="Self.FK_dbo_TimeCard_dbo_JobClassification_SkillId" FromRole="JobClassification" ToRole="TimeCard" />
+    <Property Name="SkillCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PayScale">
+    <Key>
+      <PropertyRef Name="PayScaleId" />
+    </Key>
+    <Property Name="PayScaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BasicHourlyRate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="FringeBenefitPayments" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="SkillId" Type="Int32" Nullable="false" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="JobClassification" Relationship="Self.FK_dbo_PayScale_dbo_JobClassification_SkillId" FromRole="PayScale" ToRole="JobClassification" />
+    <NavigationProperty Name="Project" Relationship="Self.fk_dbo_PayScale_dbo_Project_ProjectId" FromRole="PayScale" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectLocation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProjectDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DistanceFromUnionHall" Type="Int32" Nullable="false" />
+    <Property Name="ProjectSupervisor" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PayScales" Relationship="Self.fk_dbo_PayScale_dbo_Project_ProjectId" FromRole="Project" ToRole="PayScale" />
+    <NavigationProperty Name="TimeCards" Relationship="Self.FK_dbo_TimeCard_dbo_Project_ProjectId" FromRole="Project" ToRole="TimeCard" />
+    <Property Name="ProjectNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="WilcoModel.FK_dbo_Project_dbo_Customer_CustomerId" FromRole="Project" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="TimeCard">
+    <Key>
+      <PropertyRef Name="TimeCardId" />
+    </Key>
+    <Property Name="TimeCardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="SkillId" Type="Int32" Nullable="false" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TimeIn" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="TimeOut" Type="Time" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_TimeCard_dbo_Employee_EmployeeId" FromRole="TimeCard" ToRole="Employee" />
+    <NavigationProperty Name="JobClassification" Relationship="Self.FK_dbo_TimeCard_dbo_JobClassification_SkillId" FromRole="TimeCard" ToRole="JobClassification" />
+    <NavigationProperty Name="Project" Relationship="Self.FK_dbo_TimeCard_dbo_Project_ProjectId" FromRole="TimeCard" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_dbo_TimeCard_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TimeCard" Type="Self.TimeCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="TimeCard">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PayScale_dbo_JobClassification_SkillId">
+    <End Role="JobClassification" Type="Self.JobClassification" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PayScale" Type="Self.PayScale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobClassification">
+        <PropertyRef Name="SkillId" />
+      </Principal>
+      <Dependent Role="PayScale">
+        <PropertyRef Name="SkillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TimeCard_dbo_JobClassification_SkillId">
+    <End Role="JobClassification" Type="Self.JobClassification" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TimeCard" Type="Self.TimeCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobClassification">
+        <PropertyRef Name="SkillId" />
+      </Principal>
+      <Dependent Role="TimeCard">
+        <PropertyRef Name="SkillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_dbo_PayScale_dbo_Project_ProjectId">
+    <End Role="Project" Type="Self.Project" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PayScale" Type="Self.PayScale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="PayScale">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TimeCard_dbo_Project_ProjectId">
+    <End Role="Project" Type="Self.Project" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TimeCard" Type="Self.TimeCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="TimeCard">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WilcoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="JobClassifications" EntityType="Self.JobClassification" />
+    <EntitySet Name="PayScales" EntityType="Self.PayScale" />
+    <EntitySet Name="Projects" EntityType="Self.Project" />
+    <EntitySet Name="TimeCards" EntityType="Self.TimeCard" />
+    <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+    <AssociationSet Name="FK_dbo_TimeCard_dbo_Employee_EmployeeId" Association="Self.FK_dbo_TimeCard_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="TimeCard" EntitySet="TimeCards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PayScale_dbo_JobClassification_SkillId" Association="Self.FK_dbo_PayScale_dbo_JobClassification_SkillId">
+      <End Role="JobClassification" EntitySet="JobClassifications" />
+      <End Role="PayScale" EntitySet="PayScales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TimeCard_dbo_JobClassification_SkillId" Association="Self.FK_dbo_TimeCard_dbo_JobClassification_SkillId">
+      <End Role="JobClassification" EntitySet="JobClassifications" />
+      <End Role="TimeCard" EntitySet="TimeCards" />
+    </AssociationSet>
+    <AssociationSet Name="fk_dbo_PayScale_dbo_Project_ProjectId" Association="Self.fk_dbo_PayScale_dbo_Project_ProjectId">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="PayScale" EntitySet="PayScales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TimeCard_dbo_Project_ProjectId" Association="Self.FK_dbo_TimeCard_dbo_Project_ProjectId">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="TimeCard" EntitySet="TimeCards" />
+    </AssociationSet>
+    <EntitySet Name="Customers" EntityType="WilcoModel.Customer" />
+    <AssociationSet Name="FK_dbo_Project_dbo_Customer_CustomerId" Association="WilcoModel.FK_dbo_Project_dbo_Customer_CustomerId">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentTerms" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BillingAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Projects" Relationship="WilcoModel.FK_dbo_Project_dbo_Customer_CustomerId" FromRole="Customer" ToRole="Project" />
+    <Property Name="BillingCity" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BillingState" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="BillingZip" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_dbo_Project_dbo_Customer_CustomerId">
+    <End Type="WilcoModel.Customer" Role="Customer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="WilcoModel.Project" Role="Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,50 @@
+﻿@model WilcoCon.Models.JobClassification
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>JobClassification</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.SkillId)
+
+        <<div class="form-group">
+    @Html.LabelFor(model => model.SkillCode, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.SkillCode)
+        @Html.ValidationMessageFor(model => model.SkillCode)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.JobType, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.JobType)
+        @Html.ValidationMessageFor(model => model.JobType)
+    </div>
+</div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

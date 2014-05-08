@@ -1,0 +1,239 @@
+﻿@model WilcoCon.Models.EmployeePay
+@{
+    ViewBag.Title = "Wilco Employee Weekly Pay Summary";
+}
+
+<h2>Weekly Employee Pay Summary</h2>
+
+@using (Html.BeginForm())
+{
+    <text>Filter by Week End Date: </text>@Html.DropDownList("WeekEndDate", new SelectList(ViewBag.WeekEndDates))
+    <input type="submit" value="Search" />
+}
+
+<div class="container-fluid" style="max-width:100%">
+    <img src="~/Content/Images/payrollimage.PNG" style="max-width:100%" />   
+</div>
+<h2 class="text-center">
+    Statement of Earnings and Deductions
+</h2>
+<div class="row">
+    <div class="col-md-3"><b>Employee Name</b></div>
+    <div class="col-md-3"><b>@Html.DisplayFor(m =>m.EmployeeName)</b></div>
+    <div class="col-md-3"><b>Weekly Deductions</b></div>
+    <div class="col-md-3"><b>Amount</b></div>
+</div>
+<div class="row">
+    <div class="col-md-3"><b>Social Security #</b></div>
+    <div class="col-md-3">@Model.SSN</div>
+    <div class="col-md-3"><b>Federal tax</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.WeeklyFedTax)</div>
+</div>
+<div class="row">
+    <div class="col-md-3"><b>Date</b></div>
+    <div class="col-md-3">@Model.Date.ToShortDateString()</div>
+    <div class="col-md-3"><b>State Tax</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m=>m.WeeklyStateTax)</div>
+</div>
+<div class="row">
+    <div class="col-md-3"><b>Pay Period (Week End)</b></div>
+    <div class="col-md-3">@Model.WeekEndDate.ToShortDateString()</div>
+    <div class="col-md-3"><b>Social Security</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.WeeklySSTax)</div>
+</div>
+<div class="row">
+    <div class="col-md-3"><b>Tax Year</b></div>
+    <div class="col-md-3">@Model.TaxYear</div>
+    <div class="col-md-3"><b>Other</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.OtherTax)</div>
+</div>
+<div class="row">
+    <div class="col-md-3"><b>EEO Status</b></div>
+    <div class="col-md-3">@Model.EEOStatus</div>
+    <div class="col-md-3"><b>Total Deductions</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.TotalDeductions)</div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-3"><b>Gross Pay</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m=>m.GrossPay)</div>
+    <div class="col-md-3"><b>Year to Date Summary</b></div>
+    <div class="col-md-3"><b>Amount</b></div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"><b>Gross Pay</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m=>m.YTDGrossPay)</div>
+</div>
+<div class="row">
+    <div class="col-md-3"><b>Less Deductions</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.TotalDeductions)</div>
+    <div class="col-md-3"><b>Federal tax</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.YTDFedTax)</div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"><b>State Tax</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.YTDStateTax)</div>
+</div>
+<div class="row">
+    <div class="col-md-3"><b>Net Pay This Week</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.NetPay)</div>
+    <div class="col-md-3"><b>Social Security</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.YTDSSTax)</div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"><b>Other</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.YTDOtherTax)</div>
+</div>
+<div class="row">
+    <div class="col-md-3"><b>Check #</b></div>
+    <div class="col-md-3">@Model.CheckNum</div>
+    <div class="col-md-3"><b>Net Pay</b></div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.YTDNetPay)</div>
+</div>
+<h3>Regular Pay</h3>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            <b>Project</b>
+        </th>
+        <th>
+            <b>Skill Code</b>
+        </th>
+        <th>
+            <b>Rate</b>
+        </th>
+        <th>
+            <b>Fringe</b>
+        </th>
+        <th>
+            <b>Total</b>
+        </th>
+        <th>
+            <b>Hours</b>
+        </th>
+        <th>
+            <b>Gross</b>
+        </th>
+    </tr>
+@foreach (var item in Model.EmployeeRegWorkList) { 
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SkillCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fringe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gross)
+            </td>
+        </tr>
+}
+    <tr>
+        <td>
+            Total Hours Pay Hours (all skill, all jobs)
+        </td>
+        <td>
+            @Model.EmpTotalPayHours
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Total Regular Pay (all skills, all jobs)
+        </td>
+        <td>
+            @Html.DisplayFor(m=>m.EmpTotalRegularPay)
+        </td>
+    </tr>
+</table>
+<h3>Overtime Pay</h3>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            <b>Project</b>
+        </th>
+        <th>
+            <b>Skill Code</b>
+        </th>
+        <th>
+            <b>Rate</b>
+        </th>
+        <th>
+            <b>Fringe</b>
+        </th>
+        <th>
+            <b>Total</b>
+        </th>
+        <th>
+            <b>Hours</b>
+        </th>
+        <th>
+            <b>Gross</b>
+        </th>
+    </tr>
+@foreach (var item in Model.EmployeeOTWorkList)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkillCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fringe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gross)
+        </td>
+    </tr>
+}
+    <tr>
+        <td>
+            Total Overtime Pay Hours (all skills, all jobs)
+        </td>
+        <td>
+            @Model.EmpOTTotalPayHours
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Total Overtime Pay
+        </td>
+        <td>
+            @Html.DisplayFor(m=>m.EmpTotalOTPay)
+        </td>
+    </tr>
+</table>
+
+    
+
+

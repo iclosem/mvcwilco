@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WilcoCon.Models.JobClassification>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Job Classifications</h2>
+
+<p>
+    @Html.ActionLink("Create New Skill Code", "Create")
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            Skill Code
+        </th>
+        <th>
+            Job Type
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem=>item.SkillCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobType)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.SkillId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SkillId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SkillId })*@
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.SkillId })</li>
+                    <li>@Html.ActionLink("Details", "Details", new { id = item.SkillId })</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.SkillId })</li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

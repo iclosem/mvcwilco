@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WilcoCon.Models.Project>
+@using WilcoCon.Helpers
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Projects</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create") | 
+    @Html.ActionLink("Active Projects Only", "ActiveProjects")
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            Project Number
+        </th>
+        <th>
+            Project Location
+        </th>
+        <th>
+            Project Description
+        </th>
+        <th>
+            Distance (Union Hall)
+        </th>
+        <th>
+            Project Supervisor
+        </th>
+        <th>
+            Active
+        </th>
+        <th>
+            Customer Id
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DistanceFromUnionHall)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectSupervisor)
+        </td>
+        <td>
+            @Html.YesNo(item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerId)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.ProjectId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProjectId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProjectId })  |
+            @Html.ActionLink("EEOCReport", "EEOCReport", new { id=item.ProjectId})  |
+            @Html.ActionLink("Compensation Report", "CompReport", new { id=item.ProjectId})*@
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("Details", "Details", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("EEOCReport", "EEOCReport", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("Compensation Report", "CompReport", new { id=item.ProjectId})</li>
+                </ul>
+            </div>
+            @*<div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("Details", "Details", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectId })</li>
+                </ul>
+            </div>*@
+        </td>
+    </tr>
+}
+</table>

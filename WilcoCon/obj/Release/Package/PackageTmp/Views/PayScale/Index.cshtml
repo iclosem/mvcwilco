@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WilcoCon.Models.PayScale>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Pay Scales</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Basic Hourly rate
+        </th>
+        <th>
+            Fringe Benefit Payments
+        </th>
+        <th>
+            Skill Code
+        </th>
+        <th>
+            Project Number
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BasicHourlyRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FringeBenefitPayments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobClassification.SkillCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.ProjectNumber)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.PayScaleId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PayScaleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PayScaleId })*@
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Edit", "Edit", new { id=item.PayScaleId })</li>
+                    <li>@Html.ActionLink("Details", "Details", new { id = item.PayScaleId })</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.PayScaleId })</li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

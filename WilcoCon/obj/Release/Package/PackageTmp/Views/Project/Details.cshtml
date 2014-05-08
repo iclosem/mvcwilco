@@ -1,0 +1,62 @@
+﻿@model WilcoCon.Models.Project
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Project</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Project Id
+        </dt>
+        <dd>
+            @Html.DisplayFor(model =>model.ProjectId)
+        </dd>
+        <dt>
+            Project Location
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectLocation)
+        </dd>
+
+        <dt>
+            Project Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectDescription)
+        </dd>
+
+        <dt>
+            Distance from Union Hall
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DistanceFromUnionHall)
+        </dd>
+
+        <dt>
+            Project Supervisor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectSupervisor)
+        </dd>
+        <dt>
+            Customer Id
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.CustomerId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

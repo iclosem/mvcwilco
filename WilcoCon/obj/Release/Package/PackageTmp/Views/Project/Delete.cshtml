@@ -1,0 +1,56 @@
+﻿@model WilcoCon.Models.Project
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DistanceFromUnionHall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DistanceFromUnionHall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectSupervisor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectSupervisor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

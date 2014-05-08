@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fd34d424c4ec493f9c0d445a6550feac" Name="Diagram1" ZoomLevel="69">
+        <EntityTypeShape EntityType="WilcoModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WilcoModel.Employee" Width="1.5" PointX="11.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WilcoModel.JobClassification" Width="1.5" PointX="4.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="WilcoModel.PayScale" Width="1.5" PointX="6.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WilcoModel.Project" Width="1.5" PointX="8" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WilcoModel.TimeCard" Width="1.5" PointX="9.875" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WilcoModel.UserProfile" Width="1.5" PointX="2.75" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="WilcoModel.FK_dbo_TimeCard_dbo_Employee_EmployeeId" ManuallyRouted="false" />
+        <AssociationConnector Association="WilcoModel.FK_dbo_PayScale_dbo_JobClassification_SkillId" ManuallyRouted="false" />
+        <AssociationConnector Association="WilcoModel.FK_dbo_TimeCard_dbo_JobClassification_SkillId" ManuallyRouted="false" />
+        <AssociationConnector Association="WilcoModel.fk_dbo_PayScale_dbo_Project_ProjectId" ManuallyRouted="false" />
+        <AssociationConnector Association="WilcoModel.FK_dbo_TimeCard_dbo_Project_ProjectId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WilcoModel.Customer" Width="1.5" PointX="1.75" PointY="1.75" />
+        <AssociationConnector Association="WilcoModel.FK_dbo_Project_dbo_Customer_CustomerId" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

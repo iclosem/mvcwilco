@@ -1,0 +1,129 @@
+﻿@model WilcoCon.Models.CustomerDetailViewModel
+@using WilcoCon.Helpers
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Customer Id
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Customer.CustomerId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+
+        <dt>
+            Last Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.PaymentTerms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.PaymentTerms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.BillingAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.BillingAddress)
+        </dd>
+
+        <dt>
+            Billing City
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.BillingCity)
+        </dd>
+
+        <dt>
+            Billing State
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.BillingState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.BillingZip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.BillingZip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.Notes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Customer.CustomerId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<br />
+<h3>List of Projects from this Customer</h3>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            Project Number
+        </th>
+        <th>
+            Active?
+        </th>
+    </tr>
+@foreach (var item in Model.Projects)
+{
+    <tr>
+        <td>
+            <a href="/Project/Details/@item.ProjectId">@Html.DisplayFor(modelItem => item.ProjectNumber)</a>
+        </td>
+        <td>
+            @Html.YesNo(item.Active)
+        </td>
+    </tr>
+}
+</table>
+<h3>Create a new project:</h3>
+<p><a class="btn btn-info" href="/Project/Create">Create &raquo;</a></p>

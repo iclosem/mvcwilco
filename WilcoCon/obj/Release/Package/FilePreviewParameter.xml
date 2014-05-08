@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="wilcomvc" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Robin\\Documents\\Visual\ Studio\ 2013\\Projects\\WilcoCon\\WilcoCon\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Robin\\Documents\\Visual\ Studio\ 2013\\Projects\\WilcoCon\\WilcoCon\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=tcp:rnz7i0fajt.database.windows.net,1433;Initial Catalog=wilcoDB;User Id=iclosem@rnz7i0fajt;Password=3Fibnj58" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Robin\\Documents\\Visual\ Studio\ 2013\\Projects\\WilcoCon\\WilcoCon\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="WilcoEntities-Web.config Connection String" description="" value="metadata=res://*/Models.WilcoDB.csdl|res://*/Models.WilcoDB.ssdl|res://*/Models.WilcoDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=tcp:rnz7i0fajt.database.windows.net,1433;Initial Catalog=wilcoDB;User Id=iclosem@rnz7i0fajt;Password=3Fibnj58&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Robin\\Documents\\Visual\ Studio\ 2013\\Projects\\WilcoCon\\WilcoCon\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='WilcoEntities']/@connectionString" />
+  </parameter>
+</parameters>

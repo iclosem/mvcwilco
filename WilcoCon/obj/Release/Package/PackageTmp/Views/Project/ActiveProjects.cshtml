@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WilcoCon.Models.Project>
+
+@{
+    ViewBag.Title = "ActiveProjects";
+}
+
+<h2>ActiveProjects</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")  |
+    @Html.ActionLink("Go Back", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DistanceFromUnionHall)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectSupervisor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DistanceFromUnionHall)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectSupervisor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectNumber)
+        </td>
+        <td>
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("Details", "Details", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("EEOCReport", "EEOCReport", new { id = item.ProjectId })</li>
+                    <li>@Html.ActionLink("Compensation Report", "CompReport", new { id = item.ProjectId })</li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

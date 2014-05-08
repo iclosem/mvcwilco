@@ -1,0 +1,193 @@
+﻿@model IEnumerable<WilcoCon.Models.EEOCTimeCard>
+@{
+    ViewBag.Title = "EEOCReport";
+}
+
+<h2>EEOCReport</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <text>Filter by Week End Date: </text>@Html.DropDownList("WeekEndDate", new SelectList(ViewBag.WeekEndDates))
+    <input type="submit" value="Search" />
+}
+<p><a class="btn btn-info" href="/Project/Email">Email &raquo;</a></p>a
+<div class="container-fluid" style="max-width:100%">
+        <img src="~/Content/Images/eeocreportreal.png" style="max-width:100%" />    
+</div>
+<table class="table table-bordered">
+    <tr>
+        <td><b>Part A- Date</b></td>
+    </tr>
+    <tr>
+        <td>
+            This report is for the work period ending: @ViewBag.Date
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            <b>Part B- Project Information</b>
+        </th>
+        <th>
+            <b>Part C - Contractor Information</b>
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Project Number
+        </th>
+        <th>
+            ContractorNumber
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @ViewBag.ProjectNumber
+        </td>
+        <td>
+            31-0646843
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Project Location
+        </th>
+        <th>
+            Name and Location of Contractor(include County)
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @ViewBag.ProjectLocation
+        </td>
+        <td>
+            Wilco Construction Company <br />
+            Knockemstiff, OH <br />
+            Ross County
+        </td>
+    </tr>
+    <tr>
+        <th>
+            EEOC Compliance Certificate Expires on:
+        </th>
+        <th>
+            Project Description
+        </th>
+    </tr>
+    <tr>
+        <td>
+            December 31, 2014
+        </td>
+        <td>
+            @ViewBag.ProjectDescription
+        </td>
+    </tr>
+</table>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            <b>Job Classification</b>
+        </th>
+        <th>
+            <b>Male+Minority</b>
+        </th>
+        <th>
+            <b>Female+Minority</b>
+        </th>
+        <th>
+            <b>Male+Non-Minority</b>
+        </th>
+        <th>
+            <b>Female+Non-Minority</b>
+        </th>
+        <th>
+            <b>Job Hours</b>
+        </th>
+        <th>
+            <b>% Minority</b>
+        </th>
+        <th>
+            <b>% Female</b>
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model) { 
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SkillCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaleMinorityHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FemaleMinorityHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaleNonMinorityHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FemaleNonMinorityHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PercentageJobHoursWorkedMinority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PercentageJobHoursWorkedFemale)
+            </td>
+        </tr>
+}
+    <tr>
+        <td>
+            <b>Total</b>
+        </td>
+        <td>
+            @ViewBag.TotalMaleMinorityHours
+        </td>
+        <td>
+            @ViewBag.TotalFemaleMinorityHours
+        </td>
+        <td>
+            @ViewBag.TotalMaleNonMinorityHours
+        </td>
+        <td>
+            @ViewBag.TotalFemaleNonMinorityHours
+        </td>
+        <td>
+            @ViewBag.TotalJobHours
+        </td>
+        <td>
+            @ViewBag.TotalPercentageMinority
+        </td>
+        <td>
+            @ViewBag.TotalPercentageFemale
+        </td>
+    </tr>
+
+</table>
+<table class="table table-bordered">
+    <tr>
+        <th><b>Part F- Compliance Officer Signature</b></th>
+        <th><b>Send Completed Form to:</b></th>
+    </tr>
+    <tr>
+        <td>
+            <b>Name: </b> Mary Wilson <br />
+            <b>Telephone: </b> 614-555-0386 <br />
+            <br />
+            <br />
+            <b>Signature:_______________________________________________________________</b><br />
+        </td>
+        <td>
+            State EEO Coordinator <br />
+            State Office Tower <br />
+            Columbus, OHIO, 80586
+        </td>
+    </tr>
+</table>
+

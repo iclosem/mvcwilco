@@ -1,0 +1,72 @@
+﻿@model WilcoCon.Models.TimeCard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TimeCard</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Time Card Id
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TimeCardId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            Time In
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeIn)
+        </dd>
+
+        <dt>
+            Time Out
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.SSN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.SSN)
+        </dd>
+
+        <dt>
+            Job Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobClassification.JobType)
+        </dd>
+
+        <dt>
+            Project Number
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.ProjectNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TimeCardId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

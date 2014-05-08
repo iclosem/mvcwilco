@@ -1,0 +1,9 @@
+﻿@model bool
+@if (Model == true)
+{
+    @Html.Encode("Active")
+}
+@if (Model == false)
+{
+    @Html.Encode("Inactive")
+}

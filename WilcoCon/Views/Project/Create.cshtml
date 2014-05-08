@@ -1,0 +1,88 @@
+﻿@model WilcoCon.Models.Project
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Project</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ProjectNumber">Project Number</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectNumber)
+                @Html.ValidationMessageFor(model => model.ProjectNumber)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ProjectLocation">Project Location</label>                
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectLocation)
+                @Html.ValidationMessageFor(model => model.ProjectLocation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ProjectDescription">Project Description</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectDescription)
+                @Html.ValidationMessageFor(model => model.ProjectDescription)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="DistanceFromUnionHall">Distance(Union Hall)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DistanceFromUnionHall)
+                @Html.ValidationMessageFor(model => model.DistanceFromUnionHall)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ProjectSupervisor">Project Supervisor</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectSupervisor)
+                @Html.ValidationMessageFor(model => model.ProjectSupervisor)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ProjectSupervisor">Customer Id</label>
+            <div class="col-md-10">
+                @Html.DropDownList("CustomerId")
+                @Html.ValidationMessageFor(model => model.CustomerId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Active">Active Project?</label>
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.Active)
+                @Html.ValidationMessageFor(model => model.Active)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

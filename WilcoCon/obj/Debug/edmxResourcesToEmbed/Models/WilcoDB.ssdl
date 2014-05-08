@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WilcoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PaymentTerms" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BillingAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BillingCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BillingState" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="BillingZip" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SSN" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Street" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ZipCode" Type="int" Nullable="false" />
+    <Property Name="TelephoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DOB" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="MaritalStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="EEOCOde" Type="int" Nullable="false" />
+    <Property Name="NumberOfDeductions" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobClassification">
+    <Key>
+      <PropertyRef Name="SkillId" />
+    </Key>
+    <Property Name="SkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SkillCode" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="JobType" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PayScale">
+    <Key>
+      <PropertyRef Name="PayScaleId" />
+    </Key>
+    <Property Name="PayScaleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BasicHourlyRate" Type="money" Nullable="false" />
+    <Property Name="FringeBenefitPayments" Type="money" Nullable="false" />
+    <Property Name="SkillId" Type="int" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="ProjectNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="ProjectLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ProjectDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="DistanceFromUnionHall" Type="int" Nullable="false" />
+    <Property Name="ProjectSupervisor" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TimeCard">
+    <Key>
+      <PropertyRef Name="TimeCardId" />
+    </Key>
+    <Property Name="TimeCardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="SkillId" Type="int" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="TimeIn" Type="time" Precision="7" Nullable="false" />
+    <Property Name="TimeOut" Type="time" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_dbo_PayScale_dbo_JobClassification_SkillId">
+    <End Role="JobClassification" Type="Self.JobClassification" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PayScale" Type="Self.PayScale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobClassification">
+        <PropertyRef Name="SkillId" />
+      </Principal>
+      <Dependent Role="PayScale">
+        <PropertyRef Name="SkillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_dbo_PayScale_dbo_Project_ProjectId">
+    <End Role="Project" Type="Self.Project" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PayScale" Type="Self.PayScale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="PayScale">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Project_dbo_Customer_CustomerId">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TimeCard_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TimeCard" Type="Self.TimeCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="TimeCard">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TimeCard_dbo_JobClassification_SkillId">
+    <End Role="JobClassification" Type="Self.JobClassification" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TimeCard" Type="Self.TimeCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobClassification">
+        <PropertyRef Name="SkillId" />
+      </Principal>
+      <Dependent Role="TimeCard">
+        <PropertyRef Name="SkillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TimeCard_dbo_Project_ProjectId">
+    <End Role="Project" Type="Self.Project" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TimeCard" Type="Self.TimeCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="TimeCard">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WilcoModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobClassification" EntityType="Self.JobClassification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayScale" EntityType="Self.PayScale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TimeCard" EntityType="Self.TimeCard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_PayScale_dbo_JobClassification_SkillId" Association="Self.FK_dbo_PayScale_dbo_JobClassification_SkillId">
+      <End Role="JobClassification" EntitySet="JobClassification" />
+      <End Role="PayScale" EntitySet="PayScale" />
+    </AssociationSet>
+    <AssociationSet Name="fk_dbo_PayScale_dbo_Project_ProjectId" Association="Self.fk_dbo_PayScale_dbo_Project_ProjectId">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="PayScale" EntitySet="PayScale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Project_dbo_Customer_CustomerId" Association="Self.FK_dbo_Project_dbo_Customer_CustomerId">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Project" EntitySet="Project" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TimeCard_dbo_Employee_EmployeeId" Association="Self.FK_dbo_TimeCard_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="TimeCard" EntitySet="TimeCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TimeCard_dbo_JobClassification_SkillId" Association="Self.FK_dbo_TimeCard_dbo_JobClassification_SkillId">
+      <End Role="JobClassification" EntitySet="JobClassification" />
+      <End Role="TimeCard" EntitySet="TimeCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TimeCard_dbo_Project_ProjectId" Association="Self.FK_dbo_TimeCard_dbo_Project_ProjectId">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="TimeCard" EntitySet="TimeCard" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
